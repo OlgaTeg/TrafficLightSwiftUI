@@ -8,13 +8,12 @@
 import SwiftUI
 
 enum Light {
-    case red, yellow, green
+    case red, yellow, green, off
 }
 
 struct ContentView: View {
     
-    @State private var light = Light.red
-    @State private var buttonTitle = "START"
+    @State private var light = Light.off
     
     var body: some View {
         ZStack {
@@ -31,10 +30,9 @@ struct ContentView: View {
                 
                 Spacer()
                 Button(action: {
-                    buttonTitle = "NEXT"
                     switchLight()
                 }) {
-                    Text(buttonTitle)
+                    Text(light == Light.off ? "Start" : "Next")
                         .font(.title)
                         .foregroundColor(.white)
                         .fontWeight(.heavy)
@@ -54,7 +52,7 @@ struct ContentView: View {
             light = .yellow
         case .yellow:
             light = .green
-        case .green:
+        case .green, .off:
             light = .red
         }
     }
